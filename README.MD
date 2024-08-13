@@ -3,4 +3,4 @@
 - Edited and test with Godot4 book
 - Start ¶Designing the mob scene
 - Change settings to Forward+ due to VisibleOnScreen not implemented in Compatability mode
-- Disable Blender input in Project Settings due to not implementeded
+- Disable Blender import in Project Settings due to not implementeded
