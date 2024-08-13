@@ -4,3 +4,5 @@
 - Start ¶Designing the mob scene
 - Change settings to Forward+ due to VisibleOnScreen not implemented in Compatability mode
 - Disable Blender import in Project Settings due to not implementeded
+- Add Mobs with Spawner
+- Continue ¶Jumping and squashing monsters
