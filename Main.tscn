@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bf82i7afuhjgv"]
+[gd_scene load_steps=11 format=3 uid="uid://bf82i7afuhjgv"]
 
 [ext_resource type="PackedScene" uid="uid://caoq6g60jn1l2" path="res://Player.tscn" id="1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_wy677"]
 [ext_resource type="PackedScene" uid="uid://c87qtdkjf0d3n" path="res://Mob.tscn" id="2_f1l4o"]
+[ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://themes/MinimalUI4/MinimalUI.tres" id="4_d7m7r"]
+[ext_resource type="FontFile" uid="uid://dfelqrsbyma4d" path="res://themes/MinimalUI4/OpenSans-Regular.ttf" id="5_r1hmd"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(60, 1, 60)
@@ -88,6 +90,22 @@ autostart = true
 [node name="Mob" parent="." instance=ExtResource("2_f1l4o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.109879, 0, 32.963)
 collision_mask = 0
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme = ExtResource("4_d7m7r")
+theme_type_variation = &"HeaderSmall"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r1hmd")
+text = "Score: 0"
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
