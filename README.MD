@@ -6,3 +6,5 @@
 - Disable Blender import in Project Settings due to not implementeded
 - Add Mobs with Spawner
 - Continue ¶Jumping and squashing monsters
+- Mobs are squashing!!! Continue ¶Killing the player¶
+

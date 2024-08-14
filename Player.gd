@@ -65,7 +65,6 @@ func _physics_process(delta):
 	#   in a row to smooth out the character's motion.
 	# Iterate through all collisions that occurred this frame.
 	for index in range(get_slide_collision_count()):
-		print(index)
 		# We get one of the collisions with the player
 		var collision = get_slide_collision(index)
 		# If the collision is with ground
