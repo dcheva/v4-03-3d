@@ -8,3 +8,4 @@
 - Continue ¶Jumping and squashing monsters
 - Mobs are squashing!!! Continue ¶Killing the player
 - Start part 08 - ¶Score and replay
+- Juicy counters

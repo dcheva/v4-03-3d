@@ -30,3 +30,4 @@ func _on_mob_timer_timeout():
 
 func _on_player_hit():
 	$MobTimer.stop()
+	

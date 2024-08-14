@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bf82i7afuhjgv"]
+[gd_scene load_steps=15 format=3 uid="uid://bf82i7afuhjgv"]
 
 [ext_resource type="PackedScene" uid="uid://caoq6g60jn1l2" path="res://Player.tscn" id="1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_wy677"]
@@ -10,6 +10,8 @@
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(60, 1, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_118ta"]
 
 [sub_resource type="BoxMesh" id="2"]
 
@@ -47,6 +49,22 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("1")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 10, 0, 0, 0, 40, -20, 0, 0)
+shape = SubResource("BoxShape3D_118ta")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 10, 0, 0, 0, 40, 20, 0, 0)
+shape = SubResource("BoxShape3D_118ta")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 40, 0, 10, 0, -1, 0, -1.74846e-06, 0, 0, 20)
+shape = SubResource("BoxShape3D_118ta")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, 40, 0, 10, 0, -1, 0, -1.74846e-06, 0, 0, -20)
+shape = SubResource("BoxShape3D_118ta")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -1, 0)
 mesh = SubResource("2")
@@ -56,10 +74,9 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 15, 15)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 12, 8)
 
 [node name="Camera3D" type="Camera3D" parent="Marker3D"]
 current = true
@@ -96,7 +113,6 @@ curve = SubResource("Curve3D_feojl")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0, -20)
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
 autostart = true
 
 [node name="UserInterface" type="Control" parent="."]
@@ -116,7 +132,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_r1hmd")
 text = "Score: 0
 Life: 10
-Mobs: 0"
+Mobs: 0
+Timer: 1"
 label_settings = SubResource("LabelSettings_vl1d4")
 script = ExtResource("6_vdt8b")
 

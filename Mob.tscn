@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://c87qtdkjf0d3n"]
+[gd_scene load_steps=5 format=3 uid="uid://c87qtdkjf0d3n"]
 
 [ext_resource type="PackedScene" uid="uid://d10lnjeu8w5iu" path="res://art/mob.glb" id="1_8e2md"]
 [ext_resource type="Script" path="res://Mob.gd" id="1_p11cf"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_w17fg"]
-size = Vector3(2, 0.88, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_gbjlc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pkgr4"]
+height = 1.42831
+radius = 0.640926
 
 [node name="Mob" type="CharacterBody3D" groups=["mob"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_p11cf")
@@ -17,12 +21,22 @@ script = ExtResource("1_p11cf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000213265, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.163454, 0)
-shape = SubResource("BoxShape3D_w17fg")
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0228086, 0.102304, 0.00127363)
+shape = SubResource("BoxShape3D_gbjlc")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.289658, 0.253576)
 aabb = AABB(-1.15692, -0.716293, -1.67792, 2.31384, 1.43259, 3.35584)
 
+[node name="MobDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MobDetector"]
+transform = Transform3D(2.2, 0, 0, 0, 1, 0, 0, 0, 2.2, 0, 0.712765, 0)
+shape = SubResource("CylinderShape3D_pkgr4")
+
 [connection signal="tree_entered" from="CollisionShape3D" to="." method="_on_collision_shape_3d_tree_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]

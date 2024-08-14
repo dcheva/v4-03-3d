@@ -15,8 +15,8 @@ var direction = Vector3.ZERO
 signal fall
 signal hit
 
-#func _ready():
-#	direction.z = 0.1
+func _ready():
+	direction.z = -0.1
 
 func _physics_process(delta):
 	
@@ -36,11 +36,13 @@ func _physics_process(delta):
 
 	# direcion lerp
 	direction_to = direction_to.normalized()
-	direction = lerp(direction, direction_to, delta)
+	direction = lerp(direction, direction_to, delta*4)
 	
 	# @BOOK 
 	# Setting the basis property will affect the rotation of the node.
-	$Pivot.basis = Basis.looking_at(direction)
+	# @FIXED The target vector can't be zero. 
+	if direction != Vector3.ZERO:
+			$Pivot.basis = Basis.looking_at(direction)
 	# @MY
 	# $Pivot.look_at(position + direction, Vector3.UP)
 		
@@ -85,15 +87,12 @@ func _physics_process(delta):
 	velocity = target_velocity
 	move_and_slide()
 
-
-# And this function at the bottom.
 func die():
 	hit.emit()
-
-
+	
 func _on_mob_detector_body_entered(_body):
-	die()
-
+	target_velocity.y = bounce_impulse
+	hit.emit()
 
 func _on_visible_on_screen_notifier_3d_screen_exited():
 	direction = -direction
