@@ -48,6 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Camera3D" type="Camera3D" parent="Marker3D"]
 current = true
+fov = 55.0
 
 [node name="Cylinders" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
