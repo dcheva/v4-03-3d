@@ -5,6 +5,8 @@ extends CharacterBody3D
 # Maximum speed of the mob in meters per second.
 @export var max_speed = 30
 
+signal squashed
+
 
 func _physics_process(_delta):
 	move_and_slide()
@@ -25,7 +27,10 @@ func initialize(start_position, player_position):
 	# We then rotate the velocity vector based on the mob's Y rotation
 	# in order to move in the direction the mob is looking.
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
-
-
+	
+func squash():
+	squashed.emit()
+	queue_free()
+	
 func _on_visible_on_screen_notifier_3d_screen_exited():
 	queue_free()
