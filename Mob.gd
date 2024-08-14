@@ -6,11 +6,11 @@ extends CharacterBody3D
 @export var max_speed = 30
 
 signal squashed
-
+signal removed
+signal added
 
 func _physics_process(_delta):
 	move_and_slide()
-
 
 # This function will be called from the Main scene.
 func initialize(start_position, player_position):
@@ -30,7 +30,12 @@ func initialize(start_position, player_position):
 	
 func squash():
 	squashed.emit()
+	removed.emit()
 	queue_free()
 	
 func _on_visible_on_screen_notifier_3d_screen_exited():
+	removed.emit()
 	queue_free()
+
+func _on_collision_shape_3d_tree_entered():
+	pass

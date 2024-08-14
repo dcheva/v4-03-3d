@@ -89,8 +89,11 @@ func _physics_process(delta):
 # And this function at the bottom.
 func die():
 	hit.emit()
-	queue_free()
 
 
-func _on_mob_detector_body_entered(body):
+func _on_mob_detector_body_entered(_body):
 	die()
+
+
+func _on_visible_on_screen_notifier_3d_screen_exited():
+	direction = -direction

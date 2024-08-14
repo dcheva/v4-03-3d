@@ -17,7 +17,16 @@ func _on_mob_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-
+	mob.added.emit()
+	
+	# We connect the mob to the score label to update the score upon squashing one.
+	mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
+	mob.removed.connect($UserInterface/ScoreLabel._on_mob_removed.bind())
+	mob.added.connect($UserInterface/ScoreLabel._on_mob_added.bind())
+	
+	var label = get_node("UserInterface/ScoreLabel")
+	label.mobs += 1
+	label.print_label()
 
 func _on_player_hit():
 	$MobTimer.stop()

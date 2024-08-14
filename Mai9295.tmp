@@ -26,13 +26,12 @@ _data = {
 point_count = 5
 
 [sub_resource type="LabelSettings" id="LabelSettings_vl1d4"]
-line_spacing = -20.0
+line_spacing = -10.0
 font = ExtResource("6_njn0g")
 font_size = 32
 font_color = Color(0, 0, 0, 1)
-outline_size = 1
 shadow_size = 0
-shadow_color = Color(1, 1, 1, 0.533333)
+shadow_color = Color(1, 1, 1, 0.4)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_wy677")
@@ -59,12 +58,11 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 15, 15)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 15)
 
 [node name="Camera3D" type="Camera3D" parent="Marker3D"]
 current = true
-fov = 66.0
-near = 0.1
+fov = 55.0
 
 [node name="Cylinders" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -99,6 +97,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -20, 0
 wait_time = 0.5
 autostart = true
 
+[node name="Mob" parent="." instance=ExtResource("2_f1l4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.109879, 0, 32.963)
+
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -115,8 +116,7 @@ theme_type_variation = &"HeaderSmall"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_r1hmd")
 text = "Score: 0
-Life: 10
-Mobs: 0"
+Life: 10"
 label_settings = SubResource("LabelSettings_vl1d4")
 script = ExtResource("6_vdt8b")
 

@@ -24,5 +24,4 @@ shape = SubResource("BoxShape3D_w17fg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.289658, 0.253576)
 aabb = AABB(-1.15692, -0.716293, -1.67792, 2.31384, 1.43259, 3.35584)
 
-[connection signal="tree_entered" from="CollisionShape3D" to="." method="_on_collision_shape_3d_tree_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

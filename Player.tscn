@@ -6,9 +6,9 @@
 [sub_resource type="SphereShape3D" id="1"]
 radius = 1.0742
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_qnyap"]
-height = 0.804917
-radius = 1.07385
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6wdwv"]
+height = 1.42831
+radius = 0.507105
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 6
@@ -30,7 +30,10 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MobDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.690911, 0)
-shape = SubResource("CylinderShape3D_qnyap")
+transform = Transform3D(2.2, 0, 0, 0, 1, 0, 0, 0, 2.2, 0, 0.712765, 0)
+shape = SubResource("CylinderShape3D_6wdwv")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
