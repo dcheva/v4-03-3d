@@ -13,6 +13,7 @@ var target_velocity = Vector3.ZERO
 var direction = Vector3.ZERO
 
 signal hit
+signal update
 
 func _ready():
 	direction.z = -0.1
@@ -35,24 +36,18 @@ func _physics_process(delta):
 
 	# direcion lerp
 	direction_to = direction_to.normalized()
-	direction = lerp(direction, direction_to, delta*4)
-	
-	# @BOOK 
+	var direction_ = lerp(direction, direction_to, delta*4)
+	# @FIXED The target vector can't be zero.
+	if direction_.length() > 0.001:
+		direction = direction_
 	# Setting the basis property will affect the rotation of the node.
-	# @FIXED The target vector can't be zero. 
-	if direction != Vector3.ZERO:
-			$Pivot.basis = Basis.looking_at(direction)
-	# @MY
-	# $Pivot.look_at(position + direction, Vector3.UP)
-		
-	# @MY
-	# Fixed Nose down glitch caused by Pivot.Translation.y > 0
-	# $Pivot.rotation[0] = clamp($Pivot.rotation[0]+0.25, -0.5, +0.5)
+	$Pivot.basis = Basis.looking_at(direction)
+	emit_signal("update")
 
 	# @BOOK 
 	# target_velocity.x = direction.x * speed
 	# target_velocity.z = direction.z * speed
-	
+	# @MY
 	# Ground Velocity
 	# velocity lerp without Y
 	target_velocity.x = lerp(target_velocity.x, direction.x * speed, delta * 5)

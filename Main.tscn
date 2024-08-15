@@ -74,9 +74,10 @@ transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 7.02133)
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0, 12, 8)
+transform = Transform3D(1, 0, 0, 0, 0.406737, 0.913546, 0, -0.913546, 0.406737, 0, 12, 12)
 
 [node name="Camera3D" type="Camera3D" parent="Marker3D"]
 current = true
@@ -120,6 +121,41 @@ layout_mode = 3
 anchors_preset = 0
 size_flags_vertical = 0
 
+[node name="Retry" type="ColorRect" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.639216, 0.376471, 0.823529)
+
+[node name="Label" type="Label" parent="UserInterface/Retry"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.0
+offset_top = -50.0
+offset_right = -2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme = ExtResource("4_d7m7r")
+theme_type_variation = &"HeaderSmall"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_r1hmd")
+theme_override_font_sizes/font_size = 32
+text = "Press Enter to retry"
+label_settings = SubResource("LabelSettings_vl1d4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ScoreLabel" type="Label" parent="UserInterface"]
 layout_mode = 0
 offset_left = 16.0
@@ -138,4 +174,6 @@ label_settings = SubResource("LabelSettings_vl1d4")
 script = ExtResource("6_vdt8b")
 
 [connection signal="hit" from="Player" to="UserInterface/ScoreLabel" method="_on_player_hit"]
+[connection signal="update" from="Player" to="." method="_on_player_update"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="show_retry" from="UserInterface/ScoreLabel" to="." method="_on_score_label_show_retry"]

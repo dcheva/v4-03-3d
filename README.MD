@@ -9,3 +9,5 @@
 - Mobs are squashing!!! Continue ¶Killing the player
 - Start part 08 - ¶Score and replay
 - Juicy counters
+- # @FIXED The target vector can't be zero.
+- # if direction_.length() > 0.001:

@@ -5,6 +5,8 @@ var life = 10
 var mobs = 0
 var timer = 1
 
+signal show_retry
+
 func set_mob_timer(t):
 	var timer_ = get_tree().get_root().get_node("Main/MobTimer")
 	timer_.stop()
@@ -21,19 +23,21 @@ func _on_mob_squashed():
 	print_label()
 	
 func _on_mob_removed():
-	mobs -= 1
+	mobs = get_tree().get_nodes_in_group("mob").size()
 	print_label()
 	
 func _on_mob_added():
-	mobs += 1
+	mobs = get_tree().get_nodes_in_group("mob").size()
 	print_label()
 	
 func _on_player_hit():
 	life -= 1
 	print_label()
 	if life <= 0:
-		get_tree().reload_current_scene()
+		emit_signal("show_retry")
 	
-func print_label():
-	text = "Score: %s\nLife: %s\nMobs: %s\nTimer: %s" % [score, life, mobs, timer]
+func print_label(pd = Vector3.UP):
+	text = "Score: %s\nLife: %s\nMobs: %s\nTimer: %s\nPD: %s" % [score, life, mobs, timer, pd]
+	
+	
 	
