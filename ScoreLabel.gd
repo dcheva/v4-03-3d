@@ -17,6 +17,7 @@ func set_mob_timer(t):
 	print_label()
 
 func _on_mob_squashed():
+	$Squash.play()
 	print("_on_mob_squashed")
 	set_mob_timer(-0.1)
 	score += 1
@@ -38,6 +39,7 @@ func _on_player_hit():
 	life -= 1
 	print_label()
 	if life <= 0:
+		$Gameover.play()
 		emit_signal("show_retry")
 	
 func print_label():

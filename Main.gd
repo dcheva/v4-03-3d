@@ -6,6 +6,8 @@ extends Node3D
 
 func _ready():
 	$UserInterface/Retry.hide()
+	$UserInterface/ScoreLabel/Music.autoplay = true
+	$UserInterface/ScoreLabel/Music.play()
 
 
 func _on_mob_timer_timeout():
