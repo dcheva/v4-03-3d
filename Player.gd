@@ -19,7 +19,6 @@ func _ready():
 	$AnimationPlayer.set_current_animation("float")
 	$AnimationPlayer.speed_scale = 1
 	$AnimationPlayer.play()
-	$AnimationPlayer/AudioStreamPlayer.play()
 
 func _physics_process(delta):
 	
@@ -36,7 +35,6 @@ func _physics_process(delta):
 	# Jumping.
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		target_velocity.y = jump_impulse
-		$AnimationPlayer/AudioStreamPlayer.play()
 		$AnimationPlayer.stop()
 
 	# direcion lerp
