@@ -1,19 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://bf82i7afuhjgv"]
+[gd_scene load_steps=16 format=3 uid="uid://bf82i7afuhjgv"]
 
 [ext_resource type="PackedScene" uid="uid://caoq6g60jn1l2" path="res://Player.tscn" id="1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_wy677"]
 [ext_resource type="PackedScene" uid="uid://c87qtdkjf0d3n" path="res://Mob.tscn" id="2_f1l4o"]
+[ext_resource type="Material" uid="uid://eo6rw20ultst" path="res://art/pupil.material" id="3_jq8u1"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://themes/MinimalUI4/MinimalUI.tres" id="4_d7m7r"]
 [ext_resource type="FontFile" uid="uid://dfelqrsbyma4d" path="res://themes/MinimalUI4/OpenSans-Regular.ttf" id="5_r1hmd"]
 [ext_resource type="FontFile" uid="uid://c88sr3uxmenup" path="res://fonts/Baloo2-Medium.ttf" id="6_njn0g"]
 [ext_resource type="Script" path="res://ScoreLabel.gd" id="6_vdt8b"]
 
+[sub_resource type="BoxMesh" id="2"]
+lightmap_size_hint = Vector2i(14, 21)
+material = ExtResource("3_jq8u1")
+uv2_padding = 1.0
+
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(60, 1, 60)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_118ta"]
-
-[sub_resource type="BoxMesh" id="2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eirqe"]
 albedo_color = Color(1, 0, 1, 1)
@@ -45,6 +49,11 @@ collision_layer = 4
 collision_mask = 0
 metadata/_edit_lock_ = true
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -1, 0)
+mesh = SubResource("2")
+surface_material_override/0 = ExtResource("3_jq8u1")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("1")
@@ -64,10 +73,6 @@ shape = SubResource("BoxShape3D_118ta")
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(-4.37114e-08, 0, 40, 0, 10, 0, -1, 0, -1.74846e-06, 0, 0, -20)
 shape = SubResource("BoxShape3D_118ta")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(60, 0, 0, 0, 1, 0, 0, 0, 60, 0, -1, 0)
-mesh = SubResource("2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 30, 30, 30)
@@ -139,20 +144,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -273.0
-offset_top = -50.0
-offset_right = -2.0
-offset_bottom = 1.0
+offset_left = -275.0
+offset_top = -53.0
+offset_right = 266.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 theme = ExtResource("4_d7m7r")
 theme_type_variation = &"HeaderSmall"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_r1hmd")
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("6_njn0g")
+theme_override_font_sizes/font_size = 64
 text = "Press Enter to retry"
-label_settings = SubResource("LabelSettings_vl1d4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -166,14 +174,13 @@ theme = ExtResource("4_d7m7r")
 theme_type_variation = &"HeaderSmall"
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_r1hmd")
-text = "Score: 0
-Life: 10
-Mobs: 0
-Timer: 1"
+text = "Score:
+Life:
+Mobs:
+Timer:"
 label_settings = SubResource("LabelSettings_vl1d4")
 script = ExtResource("6_vdt8b")
 
 [connection signal="hit" from="Player" to="UserInterface/ScoreLabel" method="_on_player_hit"]
-[connection signal="update" from="Player" to="." method="_on_player_update"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="show_retry" from="UserInterface/ScoreLabel" to="." method="_on_score_label_show_retry"]

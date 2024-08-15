@@ -13,6 +13,8 @@ func _on_mob_timer_timeout():
 	if get_tree():
 		if get_tree().get_nodes_in_group("mob").size() > 50:
 			return
+		if $Player == null:
+			return
 
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
@@ -27,13 +29,14 @@ func _on_mob_timer_timeout():
 	mob.initialize(mob_spawn_location.position, player_position)
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
-	# Count
-	mob.added.emit()
 	
 	# We connect the mob to the score label to update the score upon squashing one.
 	mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
 	mob.removed.connect($UserInterface/ScoreLabel._on_mob_removed.bind())
 	mob.added.connect($UserInterface/ScoreLabel._on_mob_added.bind())
+
+	# Count
+	mob.added.emit()
 
 
 func _on_player_hit():
@@ -42,6 +45,7 @@ func _on_player_hit():
 
 func _on_score_label_show_retry():
 	$UserInterface/Retry.show()
+	$Player.queue_free()
 	
 	
 func _unhandled_input(event):

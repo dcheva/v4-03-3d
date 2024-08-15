@@ -25,8 +25,8 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0228086, 0.102304, 0.00127
 shape = SubResource("BoxShape3D_gbjlc")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.289658, 0.253576)
-aabb = AABB(-1.15692, -0.716293, -1.67792, 2.31384, 1.43259, 3.35584)
+transform = Transform3D(1, 0, 0, 0, 0.202602, 0, 0, 0, 0.182156, 0, 0.289658, 0.253576)
+aabb = AABB(-1.15692, -0.716293, -0.75957, 2.31384, 1.43259, 1.51914)
 
 [node name="MobDetector" type="Area3D" parent="."]
 collision_layer = 0
@@ -37,6 +37,7 @@ monitorable = false
 transform = Transform3D(2.2, 0, 0, 0, 1, 0, 0, 0, 2.2, 0, 0.712765, 0)
 shape = SubResource("CylinderShape3D_pkgr4")
 
+[connection signal="added" from="." to="." method="_on_added"]
 [connection signal="tree_entered" from="CollisionShape3D" to="." method="_on_collision_shape_3d_tree_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]

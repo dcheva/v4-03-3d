@@ -1,7 +1,7 @@
 extends Label
 
 var score = 0
-var life = 10
+var life = 1
 var mobs = 0
 var timer = 1
 
@@ -17,27 +17,31 @@ func set_mob_timer(t):
 	print_label()
 
 func _on_mob_squashed():
+	print("_on_mob_squashed")
 	set_mob_timer(-0.1)
 	score += 1
 	life += 1
 	print_label()
 	
 func _on_mob_removed():
+	print("_on_mob_removed")
 	mobs = get_tree().get_nodes_in_group("mob").size()
 	print_label()
 	
 func _on_mob_added():
+	print("_on_mob_added")
 	mobs = get_tree().get_nodes_in_group("mob").size()
 	print_label()
 	
 func _on_player_hit():
+	print("_on_player_hit")
 	life -= 1
 	print_label()
 	if life <= 0:
 		emit_signal("show_retry")
 	
-func print_label(pd = Vector3.UP):
-	text = "Score: %s\nLife: %s\nMobs: %s\nTimer: %s\nPD: %s" % [score, life, mobs, timer, pd]
+func print_label():
+	text = "Score: %s\nLife: %s\nMobs: %s\nTimer: %s" % [score, life, mobs, timer]
 	
 	
 	

@@ -13,10 +13,13 @@ var target_velocity = Vector3.ZERO
 var direction = Vector3.ZERO
 
 signal hit
-signal update
 
 func _ready():
 	direction.z = -0.1
+	$AnimationPlayer.set_current_animation("float")
+	$AnimationPlayer.speed_scale = 1
+	$AnimationPlayer.play()
+	$AnimationPlayer/AudioStreamPlayer.play()
 
 func _physics_process(delta):
 	
@@ -33,6 +36,8 @@ func _physics_process(delta):
 	# Jumping.
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		target_velocity.y = jump_impulse
+		$AnimationPlayer/AudioStreamPlayer.play()
+		$AnimationPlayer.stop()
 
 	# direcion lerp
 	direction_to = direction_to.normalized()
@@ -40,9 +45,20 @@ func _physics_process(delta):
 	# @FIXED The target vector can't be zero.
 	if direction_.length() > 0.001:
 		direction = direction_
+		
+
+	
+	if not is_on_floor(): 
+		$AnimationPlayer.stop()
+	elif direction_.length() < 0.2:
+		$AnimationPlayer.speed_scale = 1
+		$AnimationPlayer.play()
+	else:
+		$AnimationPlayer.speed_scale = direction.length() * 6
+		$AnimationPlayer.play()
+		
 	# Setting the basis property will affect the rotation of the node.
 	$Pivot.basis = Basis.looking_at(direction)
-	emit_signal("update")
 
 	# @BOOK 
 	# target_velocity.x = direction.x * speed
