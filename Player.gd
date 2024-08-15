@@ -12,7 +12,6 @@ extends CharacterBody3D
 var target_velocity = Vector3.ZERO
 var direction = Vector3.ZERO
 
-signal fall
 signal hit
 
 func _ready():

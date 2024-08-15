@@ -5,19 +5,17 @@ var life = 10
 var mobs = 0
 var timer = 1
 
-func use_timer(t):
-	var timer_ = get_tree().get_root().get_node("Main/MobTimer").wait_time
-	if timer_ > -t + 0.01:
-		timer_ = timer_ + t
-		timer = timer_
-	print_label()
-
-func _ready():
-	use_timer(-0.1)
+func set_mob_timer(t):
+	var timer_ = get_tree().get_root().get_node("Main/MobTimer")
+	timer_.stop()
+	if timer_.wait_time + t > 0.01:
+		timer_.wait_time = timer_.wait_time + t
+	timer = timer_.wait_time
+	timer_.start()
 	print_label()
 
 func _on_mob_squashed():
-	use_timer(-0.1)
+	set_mob_timer(-0.1)
 	score += 1
 	life += 1
 	print_label()
