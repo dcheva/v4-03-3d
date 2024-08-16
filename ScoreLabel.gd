@@ -43,7 +43,7 @@ func _on_player_hit():
 		emit_signal("show_retry")
 	
 func print_label():
-	text = "Score: %s\nLife: %s\nMobs: %s\nTimer: %s" % [score, life, mobs, timer]
+	text = "Score: %s\nLife: %s\nMobs: %s" % [score, life, mobs]
 	
 	
 	

@@ -11,11 +11,12 @@ func _ready():
 
 
 func _on_mob_timer_timeout():
-	# Do not overheat
 	if get_tree():
+		# Do not overheat
 		if get_tree().get_nodes_in_group("mob").size() > 50:
 			return
-		if $Player == null:
+		# Gameover fix
+		if $UserInterface/Retry.visible:
 			return
 
 	# Create a new instance of the Mob scene.
