@@ -12,3 +12,6 @@
 - # @FIXED The target vector can't be zero.
 - # if direction_.length() > 0.001:
 - Addded Tap sound to animation - Animation with sound needs Wav files!
+- Juicyfied more
+- Cleaned up
+- Exported v1.0b
