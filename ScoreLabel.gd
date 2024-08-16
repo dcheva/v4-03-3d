@@ -18,24 +18,21 @@ func set_mob_timer(t):
 
 func _on_mob_squashed():
 	$Squash.play()
-	print("_on_mob_squashed")
 	set_mob_timer(-0.1)
 	score += 1
 	life += 1
 	print_label()
 	
 func _on_mob_removed():
-	print("_on_mob_removed")
 	mobs = get_tree().get_nodes_in_group("mob").size()
 	print_label()
 	
 func _on_mob_added():
-	print("_on_mob_added")
 	mobs = get_tree().get_nodes_in_group("mob").size()
 	print_label()
 	
 func _on_player_hit():
-	print("_on_player_hit")
+	$Hit.play()
 	life -= 1
 	print_label()
 	if life <= 0:
@@ -44,6 +41,7 @@ func _on_player_hit():
 	
 func print_label():
 	text = "Score: %s\nLife: %s\nMobs: %s" % [score, life, mobs]
-	
-	
-	
+
+
+func _on_player_jump():
+	$Jump.play()

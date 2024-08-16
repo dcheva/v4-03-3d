@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=54 format=3 uid="uid://b3kq74llqlv3x"]
 
-[ext_resource type="FontFile" uid="uid://dfelqrsbyma4d" path="res://themes/MinimalUI4/OpenSans-Regular.ttf" id="1"]
-[ext_resource type="Texture2D" uid="uid://c5cm57ixbe3ky" path="res://themes/MinimalUI4/icons.svg" id="2"]
+[ext_resource type="FontFile" uid="uid://bje0brbty04e5" path="res://themes/MinimalUI4/OpenSans-Regular.ttf" id="1"]
+[ext_resource type="Texture2D" uid="uid://esqpvaw2tlqg" path="res://themes/MinimalUI4/icons.svg" id="2"]
 
 [sub_resource type="FontFile" id="21"]
 fallbacks = Array[Font]([ExtResource("1")])

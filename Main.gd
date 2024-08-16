@@ -52,11 +52,17 @@ func _on_score_label_show_retry():
 	
 	
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
+	if $UserInterface/Retry.visible and event.is_action_pressed("enter"):
+		if not event.is_action_pressed("alt_enter"):
+			get_tree().reload_current_scene()
+	if event.is_action_pressed("alt_enter"):
+		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_FULLSCREEN:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+func _on_button_pressed():
+	if $UserInterface/Retry.visible:
 		# This restarts the current scene.
 		get_tree().reload_current_scene()
-
-
-func _on_player_update():
-	$UserInterface/ScoreLabel.print_label($Player.direction)
-

@@ -1,16 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://bf82i7afuhjgv"]
+[gd_scene load_steps=21 format=3 uid="uid://bf82i7afuhjgv"]
 
 [ext_resource type="PackedScene" uid="uid://caoq6g60jn1l2" path="res://Player.tscn" id="1"]
 [ext_resource type="Script" path="res://Main.gd" id="1_wy677"]
 [ext_resource type="PackedScene" uid="uid://c87qtdkjf0d3n" path="res://Mob.tscn" id="2_f1l4o"]
 [ext_resource type="Material" uid="uid://eo6rw20ultst" path="res://art/pupil.material" id="3_jq8u1"]
 [ext_resource type="Theme" uid="uid://b3kq74llqlv3x" path="res://themes/MinimalUI4/MinimalUI.tres" id="4_d7m7r"]
-[ext_resource type="FontFile" uid="uid://dfelqrsbyma4d" path="res://themes/MinimalUI4/OpenSans-Regular.ttf" id="5_r1hmd"]
-[ext_resource type="FontFile" uid="uid://c88sr3uxmenup" path="res://fonts/Baloo2-Medium.ttf" id="6_njn0g"]
+[ext_resource type="Theme" uid="uid://bcv2ny2u6crhk" path="res://themes/Baloo Black/Baloo Black.tres" id="5_rxscc"]
+[ext_resource type="FontFile" uid="uid://d0a4j0rs1n4g4" path="res://fonts/Baloo2-Medium.ttf" id="6_njn0g"]
 [ext_resource type="Script" path="res://ScoreLabel.gd" id="6_vdt8b"]
-[ext_resource type="AudioStream" uid="uid://dig8ytp65l8cw" path="res://art/squash.wav" id="9_00kop"]
-[ext_resource type="AudioStream" uid="uid://dogt14meg1esa" path="res://art/gameover.wav" id="10_8j3k2"]
-[ext_resource type="AudioStream" uid="uid://ejyj201gjplk" path="res://art/music.wav" id="11_dxqfa"]
+[ext_resource type="AudioStream" uid="uid://cl00gch0j6ojy" path="res://art/squash.wav" id="9_00kop"]
+[ext_resource type="AudioStream" uid="uid://c0vt23tk4oy0v" path="res://art/gameover.wav" id="10_8j3k2"]
+[ext_resource type="AudioStream" uid="uid://cj8kk70qntyim" path="res://art/music.wav" id="11_dxqfa"]
+[ext_resource type="AudioStream" uid="uid://c85xdu8wb7q6l" path="res://art/jump.wav" id="12_m65ok"]
+[ext_resource type="AudioStream" uid="uid://dsxsexrqh3knp" path="res://art/hit.wav" id="13_nbm36"]
 
 [sub_resource type="BoxMesh" id="2"]
 material = ExtResource("3_jq8u1")
@@ -124,46 +126,38 @@ autostart = true
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 0
+theme = ExtResource("5_rxscc")
 
 [node name="Retry" type="ColorRect" parent="UserInterface"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.639216, 0.376471, 0.823529)
 
-[node name="Label" type="Label" parent="UserInterface/Retry"]
+[node name="Button" type="Button" parent="UserInterface/Retry"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -275.0
-offset_top = -53.0
-offset_right = 266.0
-offset_bottom = 49.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_d7m7r")
-theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 1
-theme_override_constants/shadow_outline_size = 1
-theme_override_fonts/font = ExtResource("6_njn0g")
 theme_override_font_sizes/font_size = 64
-text = "Press Enter to retry"
-horizontal_alignment = 1
-vertical_alignment = 1
+text = "  ⏎ Retry   "
 
 [node name="ScoreLabel" type="Label" parent="UserInterface"]
 layout_mode = 0
@@ -172,12 +166,6 @@ offset_top = 8.0
 offset_right = 76.0
 offset_bottom = 31.0
 theme = ExtResource("4_d7m7r")
-theme_type_variation = &"HeaderSmall"
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_r1hmd")
-text = "Score:
-Life:
-Mobs:"
 label_settings = SubResource("LabelSettings_vl1d4")
 script = ExtResource("6_vdt8b")
 
@@ -186,11 +174,23 @@ stream = ExtResource("9_00kop")
 
 [node name="Gameover" type="AudioStreamPlayer" parent="UserInterface/ScoreLabel"]
 stream = ExtResource("10_8j3k2")
+volume_db = -3.0
 
 [node name="Music" type="AudioStreamPlayer" parent="UserInterface/ScoreLabel"]
 stream = ExtResource("11_dxqfa")
+volume_db = -6.0
 autoplay = true
 
+[node name="Jump" type="AudioStreamPlayer" parent="UserInterface/ScoreLabel"]
+stream = ExtResource("12_m65ok")
+volume_db = -6.0
+
+[node name="Hit" type="AudioStreamPlayer" parent="UserInterface/ScoreLabel"]
+stream = ExtResource("13_nbm36")
+volume_db = 6.0
+
 [connection signal="hit" from="Player" to="UserInterface/ScoreLabel" method="_on_player_hit"]
+[connection signal="jump" from="Player" to="UserInterface/ScoreLabel" method="_on_player_jump"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="pressed" from="UserInterface/Retry/Button" to="." method="_on_button_pressed"]
 [connection signal="show_retry" from="UserInterface/ScoreLabel" to="." method="_on_score_label_show_retry"]

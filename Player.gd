@@ -13,6 +13,7 @@ var target_velocity = Vector3.ZERO
 var direction = Vector3.ZERO
 
 signal hit
+signal jump
 
 func _ready():
 	direction.z = -0.1
@@ -35,6 +36,7 @@ func _physics_process(delta):
 	# Jumping.
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		target_velocity.y = jump_impulse
+		emit_signal("jump")
 		$AnimationPlayer.stop()
 
 	# direcion lerp

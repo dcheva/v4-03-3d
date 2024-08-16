@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://caoq6g60jn1l2"]
 
-[ext_resource type="PackedScene" uid="uid://bpa23aip5c1wp" path="res://art/player.glb" id="1"]
+[ext_resource type="PackedScene" uid="uid://civtqnogg772a" path="res://art/player.glb" id="1"]
 [ext_resource type="Script" path="res://Player.gd" id="2"]
-[ext_resource type="AudioStream" uid="uid://bd3s2tm7je3nr" path="res://art/tap.wav" id="2_qqcbr"]
+[ext_resource type="AudioStream" uid="uid://c4phobw5s0sln" path="res://art/tap.wav" id="2_qqcbr"]
 
 [sub_resource type="Animation" id="Animation_wwn3l"]
 length = 0.001
@@ -148,6 +148,7 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
 stream = ExtResource("2_qqcbr")
+volume_db = -6.0
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
